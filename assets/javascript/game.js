@@ -19,31 +19,37 @@ $(document).ready(function() {
 
     setHangmanWord();
 
-    // whenever user presses a key, convert it to a letter stored in keyTyped
-    function whenKeyPressed() {
+    var keyTypedArray = [];
+    var keyTyped = "";
 
-        // key is pressed
-        $("#onKeyUp").keypress(function(keyPressEvent) {
-
-            var keyTypedNumber = keyPressEvent.which;
-            console.log(keyTypedNumber);
-            
-
-            if ((keyTypedNumber < 97) || (keyTypedNumber > 122)) {
-                // don't do anything
-                alert("please type a lowercase letter");
-            } else {
-                // do a bunch of stuff
-                var keyTyped = String.fromCharCode(keyTypedNumber);
-                console.log(keyTyped);
-            }
-
-
-        });
-
+    function buildLetterArray(key) {
+        keyTypedArray.push(key);
     }
 
-    whenKeyPressed();
+    // whenever user presses a key, convert it to a letter stored in keyTyped
+    $("#onKeyUp").keypress(function(keyPressEvent) {
+
+
+        // stores the key pressed as keyTyped
+        var keyTypedNumber = keyPressEvent.which;
+        keyTyped = String.fromCharCode(keyTypedNumber);
+        console.log(keyTyped);
+
+        
+        if ((keyTypedNumber < 97) || (keyTypedNumber > 122)) {
+            // don't do anything
+            alert("please type a lowercase letter");
+        } else {
+            // do a bunch of stuff
+            buildLetterArray(keyTyped);
+            console.log(keyTypedArray);
+        }
+
+
+    });
+
+    
+
 
 
 
